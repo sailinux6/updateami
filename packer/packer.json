@@ -1,0 +1,35 @@
+{
+
+ "variables": {
+    "amiid": "{{env `amiid`}}"
+  },
+
+
+
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "us-west-2",
+      "source_ami": "{{user `amiid`}}",
+      "instance_type": "t2.micro",
+      "ssh_username": "centos",
+      "ami_name": "packer-jenkins-agent-{{isotime \"2006-01-02T1504\"}}",
+      "launch_block_device_mappings": [
+        {
+          "device_name": "/dev/sda1",
+          "volume_size": 8,
+          "volume_type": "gp2",
+          "delete_on_termination": true
+        }
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo yum update -y"
+      ]
+    }
+  ]
+}
