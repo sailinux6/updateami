@@ -13,7 +13,7 @@ amiid=$(terraform output packer_ami_id)
 user=centos
 
 # check for the updates on packer ami
-chmod 400 ./key/tmpkey
+chmod 400 key/tmpkey
 ssh -i ./key/tmpkey -o StrictHostKeyChecking=no $user@$hostip "sudo yum check-update" > /dev/null
 
 # set the variable if updates found
