@@ -17,15 +17,13 @@ chmod 400 key/tmpkey
 ssh -i ./key/tmpkey -o StrictHostKeyChecking=no $user@$hostip "sudo yum check-update"
 
 # set the variable if updates found
-if [ $? -eq 0 ]
+if [ $? -eq 100 ]
   then
-    echo "No updates found"
-    export updateami=no
-    updateami=no
-  else
     echo "Update found on image"
-    export updateami=yes
-    updateami=yes
+    updateami=yes   
+  else
+    echo "No updates found"
+    updateami=no
 fi
 
 # destroy the ec2 instance
@@ -38,8 +36,9 @@ sleep 10
 if [ $updateami == 'yes' ]
   then
     echo "updating packer image..."
-    export amiid=$amiid
-    packer build ./packer/packer.json
+    amiid=$amiid
+	export amiid=$amiid
+    /usr/bin/packer build ./packer/packer.json
 	
     
     if [ $? -eq 0 ]
