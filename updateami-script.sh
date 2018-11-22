@@ -14,18 +14,18 @@ user=centos
 
 # check for the updates on packer ami
 chmod 400 key/tmpkey
-ssh -i ./key/tmpkey -o StrictHostKeyChecking=no $user@$hostip "sudo yum check-update" > /dev/null
+ssh -i ./key/tmpkey -o StrictHostKeyChecking=no $user@$hostip "sudo yum check-update"
 
 # set the variable if updates found
 if [ $? -eq 0 ]
   then
     echo "No updates found"
 	export updateami=no
-        updateami=no
+    updateami=no
   else
     echo "Update found on image"
 	export updateami=yes
-         updateami=yes
+    updateami=yes
 fi
 
 # destroy the ec2 instance
@@ -34,7 +34,7 @@ sleep 10
 
 # Trigger another packer job from here to create ami
 
-if [ updateami == 'yes' ]
+if [ $updateami == 'yes' ]
   then
     echo "updating packer image"
 	export amiid=$amiid
