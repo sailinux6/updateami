@@ -5,6 +5,7 @@
 # create temporary ec2 instance using packer ami image
 terraform init ./terraform
 terraform apply -auto-approve ./terraform
+if [ $? -ne 0 ]; then exit 1; fi
 
 sleep 60
 
@@ -15,15 +16,21 @@ user=centos
 # check for the updates on packer ami
 chmod 400 key/tmpkey
 ssh -i ./key/tmpkey -o StrictHostKeyChecking=no $user@$hostip "sudo yum check-update"
+sshstat=$?
 
 # set the variable if updates found
-if [ $? -eq 100 ]
+if [ $sshstat -eq 100 ]
   then
     echo "Update found on image"
-    updateami=yes   
-  else
-    echo "No updates found"
+    updateami=yes
+elif [ $sshstat -eq 0 ]
+  then
+	echo "No updates found"
     updateami=no
+	
+else
+   echo "issue with ssh connection"
+   exit 1 
 fi
 
 # destroy the ec2 instance
@@ -38,7 +45,7 @@ if [ $updateami == 'yes' ]
     echo "updating packer image..."
     amiid=$amiid
 	export amiid=$amiid
-    /usr/bin/packer build ./packer/packer.json
+    sudo packer build packer/packer.json
 	
     
     if [ $? -eq 0 ]
