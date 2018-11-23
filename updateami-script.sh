@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This script will test the updates on packer ami image
-
+whoami
 # create temporary ec2 instance using packer ami image
 terraform init ./terraform
 terraform apply -auto-approve ./terraform
@@ -12,9 +12,6 @@ sleep 60
 hostip=$(terraform output ec2_public_ip)
 amiid=$(terraform output packer_ami_id)
 user=centos
-
-echo "$hostip got"
-echo "$amiid got"
 
 # check for the updates on packer ami
 chmod 400 key/tmpkey
@@ -48,7 +45,7 @@ if [ $updateami == 'yes' ]
     echo "updating packer image..."
 	echo "$amiid"
 	export base_ami=$amiid
-    sudo packer build packer/packer.json
+    sudo /usr/bin/packer build packer/packer.json
 	
     
     if [ $? -eq 0 ]
