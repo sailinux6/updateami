@@ -1,6 +1,6 @@
 {
  "variables": {
-    "amiid": "{{env `base_ami`}}",
+    "base_ami": "{{env `base_ami`}}",
 	"aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
     "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
   },
