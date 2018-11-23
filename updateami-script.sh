@@ -43,9 +43,10 @@ sleep 10
 if [ $updateami == 'yes' ]
   then
     echo "updating packer image..."
+	echo "amiid=$amild"
     amiid=$amiid
 	export amiid=$amiid
-    sudo packer build packer/packer.json
+    sudo packer build -var ' packer/packer.json
 	
     
     if [ $? -eq 0 ]
