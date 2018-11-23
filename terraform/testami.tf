@@ -9,7 +9,7 @@ data "aws_ami" "packer_ami" {
 
   filter {
     name   = "name"
-    values = ["packer-jenkins-agent*"]
+    values = ["packer-jenkins*"]
   }
 
   owners = ["305283204878"]   # update this id
