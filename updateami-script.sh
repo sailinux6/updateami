@@ -46,7 +46,7 @@ if [ $updateami == 'yes' ]
 	echo "amiid=$amild"
     amiid=$amiid
 	export amiid=$amiid
-    sudo packer build -var ' packer/packer.json
+    sudo packer build packer/packer.json
 	
     
     if [ $? -eq 0 ]
@@ -59,7 +59,3 @@ if [ $updateami == 'yes' ]
 		echo "$amiid destroyed successfully"
     fi
 fi
-
-
-
-
