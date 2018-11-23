@@ -13,6 +13,9 @@ hostip=$(terraform output ec2_public_ip)
 amiid=$(terraform output packer_ami_id)
 user=centos
 
+echo "$hostip got"
+echo "$amiid got"
+
 # check for the updates on packer ami
 chmod 400 key/tmpkey
 ssh -i ./key/tmpkey -o StrictHostKeyChecking=no $user@$hostip "sudo yum check-update"
@@ -43,9 +46,8 @@ sleep 10
 if [ $updateami == 'yes' ]
   then
     echo "updating packer image..."
-	echo "amiid=$amild"
-    amiid=$amiid
-	export amiid=$amiid
+	echo "$amiid"
+	export base_ami=$amiid
     sudo packer build packer/packer.json
 	
     
@@ -55,7 +57,7 @@ if [ $updateami == 'yes' ]
 		echo "destroying previous ami image..."
         sleep 15
         # destroying old ami
-        aws ec2 deregister-image --image-id $amiid
-		echo "$amiid destroyed successfully"
+        aws ec2 deregister-image --image-id $base_ami
+		echo "$base_ami destroyed successfully"
     fi
 fi

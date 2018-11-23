@@ -1,19 +1,16 @@
 {
-
  "variables": {
-    "amiid": "{{env `$amiid`}}",
+    "amiid": "{{env `base_ami`}}",
 	"aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
     "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
   },
-
-
   "builders": [
     {
       "type": "amazon-ebs",
 	  "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
       "region": "us-west-2",
-      "source_ami": "{{user `amiid`}}",
+      "source_ami": "{{user `base_ami`}}",
       "instance_type": "t2.micro",
       "ssh_username": "centos",
       "ami_name": "packer-jenkins-agent-{{isotime \"2006-01-02T1504\"}}",
