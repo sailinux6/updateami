@@ -45,7 +45,7 @@ if [ $updateami == 'yes' ]
     echo "updating packer image..."
 	echo "$amiid"
 	export base_ami=$amiid
-    sudo /usr/bin/packer build packer/packer.json
+    sudo /usr/bin/packer build -var "aws_access_key=$AWS_ACCESS_KEY_ID"  -var "aws_secret_key=$AWS_SECRET_ACCESS_KEY" -var "base_ami=$amiid" ./packer/packer.json
 	
     
     if [ $? -eq 0 ]
