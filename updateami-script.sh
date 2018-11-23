@@ -37,7 +37,7 @@ fi
 echo "destroying testami ec2 instance..."
 terraform destroy -auto-approve ./terraform
 sleep 10
-
+export newami=no
 # Trigger another packer job from here to create ami
 
 if [ $updateami == 'yes' ]
@@ -56,5 +56,10 @@ if [ $updateami == 'yes' ]
         # destroying old ami
         aws ec2 deregister-image --image-id $base_ami
 		echo "$base_ami destroyed successfully"
+		export newami=yes
+    else
+	  echo "error in packer build..."
+	  exit 1
     fi
+	
 fi
