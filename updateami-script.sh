@@ -51,11 +51,11 @@ if [ $updateami == 'yes' ]
     if [ $? -eq 0 ]
       then
 	    echo "new ami updated successfully"
-		echo "destroying previous ami image..."
-        sleep 15
+		#echo "destroying previous ami image..."
+        #sleep 15
         # destroying old ami
-        aws ec2 deregister-image --image-id $base_ami
-		echo "$base_ami destroyed successfully"
+        #aws ec2 deregister-image --image-id $base_ami
+		#echo "$base_ami destroyed successfully"
 		export newami=yes
     else
 	  echo "error in packer build..."
