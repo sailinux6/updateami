@@ -68,11 +68,3 @@ if [ $updateami == 'yes' ]
 	
 fi
 
-#if [ $newami == 'yes' ]
-#then
-#echo "$newami"
-#mail -s 'Notify: Packer AMI updated successfully.' sailinux6@gmail.com << EOF
-#New Packer AMI updated successfully. Please check from the below url.
-#${BUILD_URL}
-#EOF
-#fi
