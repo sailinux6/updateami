@@ -60,13 +60,13 @@ if [ $updateami == 'yes' ]
         # destroying old ami
         #aws ec2 deregister-image --image-id $base_ami
 		#echo "$base_ami destroyed successfully"
-		mail -s 'Notify: Packer AMI updated successfully.' sailinux6@gmail.com
+		mail -s 'Notify: Packer AMI updated successfully.' sailinux6@gmail.com << EOF
         New Packer AMI updated successfully. Please check from the below url.
         ${BUILD_URL}
+EOF
     else
 	  echo "error in packer build..."
 	  exit 1
     fi
 	
 fi
-
