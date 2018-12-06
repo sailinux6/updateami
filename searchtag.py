@@ -2,7 +2,7 @@ import boto3
 
 instances = [i for i in boto3.resource('ec2', region_name='us-west-2').instances.all()]
 
-tags = ['Name',]
+tags = ['Name', 'ASG']
 
 # Print instance_id of instances that do not have a list of Tags
 for i in instances:
