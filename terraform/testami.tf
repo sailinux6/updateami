@@ -12,7 +12,7 @@ data "aws_ami" "packer_ami" {
     values = ["packer-jenkins*"]
   }
 
-  owners = ["305283204878"]   # update this id
+  owners = ["602530222609"]   # update this id
 }
 
 variable "PATH_TO_PUBLIC_KEY" {
