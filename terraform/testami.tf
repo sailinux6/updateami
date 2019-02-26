@@ -8,7 +8,7 @@ data "aws_ami" "packer_ami" {
   most_recent = true
 
   filter {
-    name   = "AMI Name"
+    name   = "name"
     values = ["AMI_CIA_DB*"]
   }
 
