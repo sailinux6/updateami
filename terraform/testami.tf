@@ -8,8 +8,8 @@ data "aws_ami" "packer_ami" {
   most_recent = true
 
   filter {
-    name   = "name"
-    values = ["packer-jenkins*"]
+    name   = "AMI Name"
+    values = ["AMI_CIA_DB*"]
   }
 
   owners = ["602530222609"]   # update this id
